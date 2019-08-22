@@ -17,7 +17,32 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandlerController {
 
+    public ErrorAttributes errorAttributes() {
+        return new DefaultErrorAttributes() {
+            @Override
+            public Map<String, Object> getErrorAttributes(RequestAttributes requestAttributes, boolean includeStackTrace) {
+                Map<String, Object> errorAttributes = super.getErrorAttributes(requestAttributes, includeStackTrace);
+                errorAttributes.remove("exception");
+                return errorAttributes;
+            }
+        };
+    }
 
+    @ExceptionHandler(CustomException.class)
+    public void handleCustomException(HttpServletResponse res, CustomException ex) throws IOException {
+        res.sendError(ex.getHttpStatus().value(), ex.getMessage());
+
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public void handleAccessDeniedException(HttpServletResponse res) throws IOException {
+        res.sendError(HttpStatus.FORBIDDEN.value(), "Access Denied");
+    }
+
+    @ExceptionHandler(Exception.class)
+    public void handleException(HttpServletResponse res) throws IOException {
+        res.sendError(HttpStatus.BAD_REQUEST.value(), "Something went wrong");
+    }
 
 }
 
