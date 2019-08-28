@@ -38,7 +38,7 @@ public class UserController {
     @ApiOperation(value = "${UserController.signup}")
     @ApiResponses(value = {//
             @ApiResponse(code = 400, message = "Something went wrong"), //
-            @ApiResponse(code = 403, message = ="Access Denied"),
+            @ApiResponse(code = 403, message = "Access Denied"),
             @ApiResponse(code = 422, message = "Username is already in use"),
             @ApiResponse(code = 500, message = "Expired or invalid JWT Token")})
     public String signup(@ApiParam("Signup User") @RequestBody UserDataDTO user) {

@@ -3,12 +3,12 @@ package com.example.Server.exception;
 
 import org.springframework.boot.web.reactive.error.DefaultErrorAttributes;
 import org.springframework.boot.web.reactive.error.ErrorAttributes;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.reactive.function.server.ServerRequest;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -19,9 +19,9 @@ public class GlobalExceptionHandlerController {
 
     public ErrorAttributes errorAttributes() {
         return new DefaultErrorAttributes() {
-            @Override
+            //@Override
             public Map<String, Object> getErrorAttributes(RequestAttributes requestAttributes, boolean includeStackTrace) {
-                Map<String, Object> errorAttributes = super.getErrorAttributes(requestAttributes, includeStackTrace);
+                Map<String, Object> errorAttributes = super.getErrorAttributes((ServerRequest) requestAttributes, includeStackTrace);
                 errorAttributes.remove("exception");
                 return errorAttributes;
             }
