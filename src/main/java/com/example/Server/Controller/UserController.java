@@ -86,6 +86,4 @@ public class UserController {
     public String refresh(HttpServletRequest req) {
         return userService.refresh(req.getRemoteUser());
     }
-
-
 }

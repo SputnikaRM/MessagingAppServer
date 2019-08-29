@@ -1,13 +1,8 @@
 package com.example.Server.Models;
 
 
-
 import com.example.Server.Repository.UserRepository;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -17,20 +12,20 @@ import java.util.Optional;
 
 @Entity
 @Component
-public class User implements UserRepository{
+public class User implements UserRepository {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Size(min=4, max=20, message="Minimum username length is 4 characters")
-    @Column(unique = true,nullable = false)
+    @Size(min = 4, max = 20, message = "Minimum username length is 4 characters")
+    @Column(unique = true, nullable = false)
     private String username;
 
-    @Size(min=5,message= "Minimum password length is 5 characters")
+    @Size(min = 5, message = "Minimum password length is 5 characters")
     private String password;
 
-    @Column(unique = true,nullable = false)
+    @Column(unique = true, nullable = false)
     private String email;
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -68,12 +63,12 @@ public class User implements UserRepository{
         this.email = email;
     }
 
-    public List<Role> getRoles(){
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles){
-        this.roles=roles;
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
