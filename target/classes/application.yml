@@ -1,10 +1,12 @@
 spring:
   profiles: local
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/messagingapp
+    url: jdbc:mysql://127.0.0.1:3306/mdb
     username: root
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
      hibernate:
       ddl-auto: create
+     generate-ddl: true
+     show-sql: true
